@@ -15,10 +15,10 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/mainColor"
+            android:background="#FFFFFFFF"
             android:textAlignment="center"
             app:contentInsetStart="25dp"
-            app:titleTextColor="#FFFFFF" />
+            app:titleTextColor="#FF000000" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,9 +26,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/mainColor"
+        android:background="#FFFFFFFF"
         app:menu="@menu/bottom_navigation_menu"
-        app:itemIconTint="#FFFFFF"
-        app:itemTextColor="#FFFFFF" />
+        app:itemIconTint="#FF000000"
+        app:itemTextColor="#FF000000" />
 </RelativeLayout>
 
