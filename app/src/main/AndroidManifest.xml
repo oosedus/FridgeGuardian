@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FridgeGuardian"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".RecipeActivity" />
+        <activity android:name=".CommunityActivity" />
+        <activity android:name=".MyPageActivity" />
     </application>
 
 </manifest>

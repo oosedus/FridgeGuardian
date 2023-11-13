@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "로그인 성공", Toast.LENGTH_LONG).show()
+                        goToMainScreen()
                     } else {
                         Toast.makeText(this, "로그인 실패", Toast.LENGTH_LONG).show()
                     }
