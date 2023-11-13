@@ -1,5 +1,6 @@
 package com.example.fridgeguardian
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -19,6 +20,10 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        if (auth.currentUser != null) {
+            goToMainScreen()
+        }
+
         // 회원가입 기능
         val joinBtn = findViewById<Button>(R.id.joinBtn)
         joinBtn.setOnClickListener {
@@ -35,9 +40,7 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this, "실패 ${task.exception?.message}", Toast.LENGTH_LONG).show()
                     }
 
-
                 }
-
         }
 
         // 로그인 기능
@@ -56,13 +59,10 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
         }
-
-        // 로그아웃 기능
-        val logoutBtn = findViewById<Button>(R.id.logoutBtn)
-        logoutBtn.setOnClickListener {
-            Firebase.auth.signOut()
-            Toast.makeText(this, "로그아웃", Toast.LENGTH_LONG).show()
-        }
-
+    }
+    private fun goToMainScreen() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
