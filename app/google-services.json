@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "807034077376",
+    "project_id": "fridgeguardian-fa492",
+    "storage_bucket": "fridgeguardian-fa492.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807034077376:android:f23014fb1ab2e88452ed25",
+        "android_client_info": {
+          "package_name": "com.example.fridgeguardian"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi7EykPvlMX391ErqtY5xhY3vx8pA0Cmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
