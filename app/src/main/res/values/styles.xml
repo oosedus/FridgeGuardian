@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyMaterialButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@color/common_google_signin_btn_text_dark</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+
+</resources>
+
