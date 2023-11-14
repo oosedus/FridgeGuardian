@@ -2,6 +2,8 @@ package com.example.fridgeguardian
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
+import javax.sql.DataSource
 
 
 class RecipeAdapter(private val recipeList: List<RecipeDataForm>, private val context: Context) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
@@ -17,7 +23,6 @@ class RecipeAdapter(private val recipeList: List<RecipeDataForm>, private val co
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.recipe_image)
         val name: TextView = view.findViewById(R.id.recipe_name)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,21 +34,43 @@ class RecipeAdapter(private val recipeList: List<RecipeDataForm>, private val co
         val recipe = recipeList[position]
         holder.name.text = recipe.RCP_NM
 
-        val options = RequestOptions()
-            .placeholder(R.drawable.foodexample)
 
         // 이미지 로딩 라이브러리인 Glide를 사용하여 이미지를 불러옵니다.
-        val imageUrl = if (!recipe.ATT_FILE_NO_MAIN.isNullOrEmpty()) recipe.ATT_FILE_NO_MAIN else recipe.ATT_FILE_NO_MK
-        Glide.with(context)
-            .setDefaultRequestOptions(options)
-            .load(imageUrl)
-            .into(holder.image)
+        val imageUrl = recipe.ATT_FILE_NO_MK
+        val options = RequestOptions()
+            .placeholder(R.drawable.foodexample) // 로드 중에 표시할 이미지
+            .error(R.drawable.foodexample2) // 에러 발생 시 표시할 이미지
 
+        Glide.with(context)
+            .load(imageUrl)
+            .apply(options)
+            .listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    Log.d("ITM", "Image load failed")
+                    return false
+                }
+                override fun onResourceReady(
+                    resource: Drawable?,
+                    model: Any?,
+                    target: Target<Drawable>?,
+                    dataSource: com.bumptech.glide.load.DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    Log.d("ITM","It's success")
+                    return false
+                }
+            })
+            .into(holder.image)
 
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, RecipeDetailActivity::class.java)
-            intent.putExtra("recipeId", recipe.RCP_SEQ) // 세부 정보 페이지에서 사용할 레시피 ID를 전달합니다.
+            intent.putExtra("recipe", recipe) // 전체 RecipeDataForm 객체를 전달합니다.
             context.startActivity(intent)
         }
     }
