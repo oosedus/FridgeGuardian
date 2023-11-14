@@ -32,6 +32,7 @@
         <activity android:name=".CommunityActivity" />
         <activity android:name=".MyPageActivity" />
         <activity android:name=".RecipeSearchActivity"/>
+        <activity android:name=".RecipeDetailActivity"/>
     </application>
 
 </manifest>

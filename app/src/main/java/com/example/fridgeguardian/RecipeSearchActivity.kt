@@ -1,12 +1,20 @@
 package com.example.fridgeguardian
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
@@ -71,6 +79,13 @@ class RecipeSearchActivity : AppCompatActivity() {
                         // response.body()를 통해 응답 본문에 접근할 수 있습니다.
                         val recipeData = response.body()
                         Log.d("ITM", "Data received: $recipeData")
+
+                        val recyclerView = findViewById<RecyclerView>(R.id.recipe_recycler_view)
+                        val adapter = RecipeAdapter(recipeData?.cookRcp01?.rows ?: listOf(), this@RecipeSearchActivity)
+                        recyclerView.layoutManager = LinearLayoutManager(this@RecipeSearchActivity)
+                        recyclerView.adapter = adapter
+
+
                     } else {
                         // 요청이 실패했을 때 실행되는 코드를 작성합니다.
                         Log.d("ITM", "Request failed with status: ${response.code()}")
@@ -84,8 +99,5 @@ class RecipeSearchActivity : AppCompatActivity() {
             })
             Log.d("ITM", "Finished")
         }
-
-
-
     }
 }
