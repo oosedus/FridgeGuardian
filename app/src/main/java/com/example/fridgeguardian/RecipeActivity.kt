@@ -2,6 +2,8 @@ package com.example.fridgeguardian
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -40,9 +42,17 @@ class RecipeActivity : AppCompatActivity(){
             }
         }
 
-
-
-
+        val searchButton = findViewById<Button>(R.id.rectangle1)
+        searchButton.setOnClickListener {
+            goToRecipeSearchScreen()
+        }
 
     }
+    private fun goToRecipeSearchScreen() {
+        val intent = Intent(this, RecipeSearchActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+
 }
