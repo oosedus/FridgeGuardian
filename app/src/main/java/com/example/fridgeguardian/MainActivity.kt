@@ -3,12 +3,14 @@ package com.example.fridgeguardian
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "성공", Toast.LENGTH_LONG).show()
+                        saveUserToFirestore(email.text.toString())
 
                     } else {
                         Toast.makeText(this, "실패 ${task.exception?.message}", Toast.LENGTH_LONG).show()
@@ -60,6 +63,29 @@ class MainActivity : AppCompatActivity() {
                 }
         }
     }
+
+    private fun saveUserToFirestore(userEmail: String) {
+        val db = FirebaseFirestore.getInstance()
+        val userDoc = hashMapOf(
+            "email" to userEmail
+        )
+
+        auth.currentUser?.let { user ->
+            db.collection("users").document(userEmail) // 이메일을 문서 ID로 사용
+                .set(userDoc)
+                .addOnSuccessListener {
+                    // 성공적으로 저장된 경우
+                    Toast.makeText(this, "Firestore에 저장되었습니다.", Toast.LENGTH_LONG).show()
+                }
+                .addOnFailureListener { e ->
+                    // 저장 실패한 경우
+                    Log.d("ITM", "Firestore 저장 실패: ${e.message}")
+                    Toast.makeText(this, "Firestore 저장 실패: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+        }
+
+    }
+
     private fun goToMainScreen() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
