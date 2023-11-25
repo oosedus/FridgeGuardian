@@ -1,0 +1,5 @@
+<!--옵션 눌렀을때 버튼 색깔 변화-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/black_overlay" android:state_pressed="true" />
+    <item android:drawable="@color/white" />
+</selector>
