@@ -29,25 +29,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookmark_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="415dp"
+        android:layout_height="615dp"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="0dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="109dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/bookmark_recycler_view"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="145dp"
-        android:text="Button" />
 
 
 </RelativeLayout>

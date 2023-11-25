@@ -6,6 +6,8 @@ import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,6 +29,7 @@ class BookmarkActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.navigation)
+        bottomNav.selectedItemId = R.id.nav_recipe
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -75,29 +78,28 @@ class BookmarkActivity : AppCompatActivity() {
                     bookmarksList.add(Pair(bookmark, bookmarkValue))
 
                 }
+                val recyclerView = findViewById<RecyclerView>(R.id.bookmark_recycler_view)
+                val itemMargin = RecyclerviewMargin()
+                recyclerView.addItemDecoration(itemMargin)
+                val adapter = BookmarkAdapter(bookmarksList, this@BookmarkActivity)
+                recyclerView.layoutManager = LinearLayoutManager(this@BookmarkActivity)
+                recyclerView.adapter = adapter
+
+                // 리소스에서 Divider Drawable 가져오기
+                val divider = ContextCompat.getDrawable(this@BookmarkActivity, R.drawable.divider)
+
+                divider?.let {
+                    val dividerItemDecoration = DividerItemDecoration(this@BookmarkActivity, RecyclerView.VERTICAL)
+                    dividerItemDecoration.setDrawable(it)
+                    recyclerView.addItemDecoration(dividerItemDecoration)
+                }
+
+
+
+                Log.d("ITM", "finished")
             }.addOnFailureListener { exception ->
                 Log.d("ITM", "데이터 로드 실패: ${exception.message}")
             }
         }
-
-        // 임시 버튼, 버튼 눌렸을 때 정보 알려주는
-        // for을 이용해서 bookmark 정보 전부 다 알려줌
-        val tempButton = findViewById<Button>(R.id.button3)
-        tempButton.setOnClickListener {
-            Log.d("ITM", "Button clicked")
-            for (bookmark in bookmarksList) {
-                Log.d("ITM", "Button clicked")
-                Log.d("ITM", "북마크: ${bookmark.first}, 값: ${bookmark.second}")
-            }
-            val bookmark = bookmarksList[0]
-            Log.d("ITM", "bookmark.second type: ${bookmark.second::class.java}")
-
-        }
-
-        val recyclerView = findViewById<RecyclerView>(R.id.bookmark_recycler_view)
-        val adapter = BookmarkAdapter(bookmarksList, this@BookmarkActivity)
-        recyclerView.layoutManager = LinearLayoutManager(this@BookmarkActivity)
-        recyclerView.adapter = adapter
-
     }
 }

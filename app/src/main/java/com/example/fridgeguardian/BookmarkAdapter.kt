@@ -36,7 +36,6 @@ class BookmarkAdapter(private val bookmarksList: List<Pair<String, Any>>, privat
         // 그냥 bookmark.second로 전달하면 hashmap형태이므로 intent에 담겨서 전달 되지 않는다
         val temprecipe = bookmark.second as HashMap<String, Any>
 
-
         val imageUrl = (bookmark.second as? HashMap<String, Any>)?.get("이미지경로") as? String ?: "기본 URL"
         val RCP_SEQ = (bookmark.second as? HashMap<*, *>)?.get("일련번호")as? Long
         val INFO_ENG = (bookmark.second as? HashMap<*, *>)?.get("열량")as? Double
@@ -79,7 +78,6 @@ class BookmarkAdapter(private val bookmarksList: List<Pair<String, Any>>, privat
             MANUAL20 = temprecipe["만드는법_20"] as? String,
             RCP_NA_TIP = temprecipe["저감 조리법 TIP"] as? String
         )
-
 
         val options = RequestOptions()
             .placeholder(R.drawable.foodexample) // 로드 중에 표시할 이미지
