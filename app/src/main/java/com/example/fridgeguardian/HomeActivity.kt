@@ -76,7 +76,7 @@ class HomeActivity : AppCompatActivity() {
             isOutsideTouchable = true
         }
 
-        // Set the button click listeners on the popup's views
+        // 팝업창 내에 클릭 시 해당 액티비티로 넘어가게 설정
         val keyboardLayout = popupView.findViewById<LinearLayout>(R.id.keyboard_registration_layout)
         val voiceLayout = popupView.findViewById<LinearLayout>(R.id.voice_registration_layout)
 
@@ -90,20 +90,16 @@ class HomeActivity : AppCompatActivity() {
             popupWindow.dismiss()
         }
 
-        // Measure the popup to make calculations accurate
         popupView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
 
-        // Show the popup above the anchorView (registration button)
         anchorView.post {
-            // Get location of anchorView on screen
             val location = IntArray(2)
             anchorView.getLocationOnScreen(location)
 
-            // x and y locations for the popup window
             val x = location[0] + anchorView.width / 2 - popupView.measuredWidth / 2
             val y = location[1] - popupView.measuredHeight
 
-            // If you want to show the popup with some space above the button, subtract the desired space from y
+            // 등록 버튼 위에 팝업 창 생기게 위치 설정
             popupWindow.showAtLocation(anchorView, Gravity.NO_GRAVITY, x, y - 10)
         }
     }
