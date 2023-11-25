@@ -43,10 +43,10 @@
             android:id="@+id/ingredient_edit_button"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/imageview_click_selector"
             android:clickable="true"
-            android:contentDescription="EDIT!"
             android:focusable="true"
+            android:contentDescription="EDIT!"
             android:src="@drawable/ingredient_edit_button" />
 
     </LinearLayout>
