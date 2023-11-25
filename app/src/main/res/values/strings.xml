@@ -4,4 +4,5 @@
     <string name="navigation_recipe">Recipe</string>
     <string name="navigation_community">Community</string>
     <string name="navigation_mypage">MyPage</string>
+    <string name="d_day_format">D-%1$d</string>
 </resources>
