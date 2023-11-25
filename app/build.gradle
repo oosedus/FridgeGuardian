@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id("com.google.gms.google-services")
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -31,6 +31,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding{
+        enabled true
+    }
+    //binding 추가
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -45,7 +52,7 @@ dependencies {
 
     implementation("com.google.firebase:firebase-firestore")
     implementation 'com.google.firebase:firebase-database:20.1.0'
-
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.9.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

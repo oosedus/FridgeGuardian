@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <corners android:radius="100dp" />
+
+    <solid android:color="#ffffff" />
+
+
+</shape>
+<!--이 파일은 처음에 intro할 때 각각의 버튼들을 둥글게 만들때-->
