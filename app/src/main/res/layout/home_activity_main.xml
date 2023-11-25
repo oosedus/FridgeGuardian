@@ -21,6 +21,16 @@
             app:titleTextColor="#FF000000" />
     </com.google.android.material.appbar.AppBarLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="528dp"
+        android:layout_above="@id/navigation"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginTop="40dp"
+        android:padding="16dp"
+        android:scrollbars="vertical" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -31,4 +41,3 @@
         app:itemIconTint="#FF000000"
         app:itemTextColor="#FF000000" />
 </RelativeLayout>
-
