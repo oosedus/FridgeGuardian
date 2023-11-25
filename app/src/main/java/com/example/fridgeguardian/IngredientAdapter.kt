@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fridgeguardian.databinding.IngredientItemBinding
+import com.example.fridgeguardian.databinding.IngredientItemFormBinding
 import java.text.SimpleDateFormat
 import java.util.ArrayList
 import java.util.Calendar
@@ -17,37 +17,41 @@ data class Ingredient(
     var category: String = "",
     var quantity: Int = 0,
     var expDate: Date? = null
-){
+) {
     val daysUntilExpired: Int
-        get() = ((expDate?.time ?: 0L) - Date().time).div(1000 * 60 * 60 * 24).toInt()
+        get() {
+            val today = Calendar.getInstance().time
+            return if (expDate != null) {
+                ((expDate!!.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
+            } else {
+                0
+            }
+        }
 }
 
 class IngredientAdapter(private val ingredientsList: ArrayList<Ingredient>) :
     RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder>() {
 
-    class IngredientViewHolder(val binding: IngredientItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class IngredientViewHolder(val binding: IngredientItemFormBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
-        val binding = IngredientItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = IngredientItemFormBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return IngredientViewHolder(binding)
     }
 
+    // 식재료 이름, 카테고리, 수량, 유통기한 모두 View
     override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
         val ingredient = ingredientsList[position]
         with(holder.binding) {
             ingredientName.text = ingredient.name
-            ingredientExpDate.text =
-                SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(ingredient.expDate)
+            ingredientCategory.text = ingredient.category
+            ingredientQuantity.text = "Quantity : ${ingredient.quantity.toString()}"
 
-            val today = Calendar.getInstance().time
-            val expDate = ingredient.expDate ?: today
-            val dDay = ((expDate.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
-            ingredientDDay.text = root.context.getString(
-                R.string.d_day_format,
-                Math.abs(dDay)
-            )
-            // D-Day 5일 이하는 빨간 글씨로 표시, 나머지는 검정색으로 표시
-            ingredientDDay.setTextColor(if (dDay <= 5) Color.RED else Color.BLACK)
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            ingredientExpDate.text = ingredient.expDate?.let { sdf.format(it) } ?: "N/A"
+            ingredientDDay.text = "D-${ingredient.daysUntilExpired}"
+
+            ingredientDDay.setTextColor(if (ingredient.daysUntilExpired <= 5) Color.RED else Color.BLACK)
         }
     }
 
