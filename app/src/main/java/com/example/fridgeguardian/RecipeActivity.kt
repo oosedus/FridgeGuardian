@@ -47,9 +47,20 @@ class RecipeActivity : AppCompatActivity(){
             goToRecipeSearchScreen()
         }
 
+        val searchButton2 = findViewById<Button>(R.id.rectangle3)
+        searchButton2.setOnClickListener {
+            goToBookmarkScreen()
+        }
+
     }
     private fun goToRecipeSearchScreen() {
         val intent = Intent(this, RecipeSearchActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToBookmarkScreen() {
+        val intent = Intent(this, BookmarkActivity::class.java)
         startActivity(intent)
         finish()
     }

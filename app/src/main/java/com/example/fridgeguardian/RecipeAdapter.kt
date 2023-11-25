@@ -70,6 +70,8 @@ class RecipeAdapter(private val recipeList: List<RecipeDataForm>, private val co
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, RecipeDetailActivity::class.java)
+            Log.d("ITM", "abc ${recipe}")
+            Log.d("ITM", "bookmark.second type: ${recipe::class.java}")
             intent.putExtra("recipe", recipe) // 전체 RecipeDataForm 객체를 전달합니다.
             context.startActivity(intent)
         }

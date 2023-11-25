@@ -33,6 +33,7 @@
         <activity android:name=".MyPageActivity" />
         <activity android:name=".RecipeSearchActivity"/>
         <activity android:name=".RecipeDetailActivity"/>
+        <activity android:name=".BookmarkActivity"/>
     </application>
 
 </manifest>

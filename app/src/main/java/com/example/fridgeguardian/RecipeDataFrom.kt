@@ -3,15 +3,14 @@ package com.example.fridgeguardian
 import java.io.Serializable
 
 data class RecipeDataForm(
-    val RCP_SEQ: Int?,
+    val RCP_SEQ: Long?,
     val RCP_NM: String?,
     val RCP_WAY2: String?,
-    val INFO_WGT: String?,
-    val INFO_ENG: Float?,
-    val INFO_CAR: Float?,
-    val INFO_PRO: Float?,
-    val INFO_FAT: Float?,
-    val INFO_NA: Float?,
+    val INFO_ENG: Double?,
+    val INFO_CAR: Double?,
+    val INFO_PRO: Double?,
+    val INFO_FAT: Double?,
+    val INFO_NA: Double?,
     val HASH_TAG: String?,
     val ATT_FILE_NO_MK: String?,
     val RCP_PARTS_DTLS: String?,
