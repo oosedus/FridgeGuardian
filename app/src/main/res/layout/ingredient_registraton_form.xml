@@ -51,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:hint="Input Your Ingredient Name"
+            android:textSize="20dp"
             android:inputType="text" />
 
     </LinearLayout>
