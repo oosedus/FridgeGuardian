@@ -54,6 +54,7 @@
         <activity android:name=".BookmarkActivity"/>
         <activity android:name=".KeyboardRegistrationActivity" />
         <activity android:name=".VoiceRegistrationActivity"/>
+        <activity android:name=".IngredientEditActivity"/>
     </application>
 
 </manifest>

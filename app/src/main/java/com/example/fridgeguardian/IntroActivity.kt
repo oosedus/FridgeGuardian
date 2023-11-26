@@ -17,7 +17,6 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_intro)
-
         binding.loginBtn.setOnClickListener {
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
