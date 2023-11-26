@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fridgeguardian.databinding.ActivityKeyboardRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -99,25 +100,25 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
     private fun setupDatePicker(editText: EditText) {
         editText.setOnClickListener {
             val calendar = Calendar.getInstance()
-            DatePickerDialog(this,
-                { _, year, month, dayOfMonth ->
-                    val selectedCalendar = Calendar.getInstance()
-                    selectedCalendar.set(year, month, dayOfMonth, 0, 0, 0)
-                    if (selectedCalendar.time.before(Calendar.getInstance().time)) {
-                        // 사용자가 현재 시간보다 과거 날짜를 골랐을때 오류
-                        editText.setBackgroundColor(Color.RED)
-                        Toast.makeText(this, "Expiration date cannot be in the past.", Toast.LENGTH_LONG).show()
-                    } else {
-                        editText.tag = selectedCalendar.time
-                        val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
-                        editText.setText(dateFormat.format(selectedCalendar.time))
-                        editText.setBackgroundColor(Color.TRANSPARENT)
-                    }
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            DatePickerDialog(this, { _, year, month, dayOfMonth ->
+                val selectedCalendar = Calendar.getInstance()
+                selectedCalendar.set(year, month, dayOfMonth, 0, 0, 0)
+                val today = Calendar.getInstance()
+                today.set(Calendar.HOUR_OF_DAY, 0)
+                today.set(Calendar.MINUTE, 0)
+                today.set(Calendar.SECOND, 0)
+                today.set(Calendar.MILLISECOND, 0)
+
+                if (!selectedCalendar.after(today)) {
+                    editText.setBackgroundColor(Color.RED)
+                    Toast.makeText(this, "Expiration date cannot be in the past or today.", Toast.LENGTH_LONG).show()
+                } else {
+                    editText.tag = selectedCalendar.time
+                    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    editText.setText(dateFormat.format(selectedCalendar.time))
+                    editText.setBackgroundColor(Color.TRANSPARENT)
+                }
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
         }
     }
 
@@ -125,9 +126,7 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
     // 다 채워졌을때만 Firestore 에 저장됨.
     private fun handleFinishButton() {
         binding.btnFinish.setOnClickListener {
-            val allFormsFilled = checkAllForms()
-
-            if (allFormsFilled) {
+            if (validateInputs()) {
                 ingredientsList.clear()
                 for (i in 0 until binding.ingredientFormContainer.childCount) {
                     val ingredientView = binding.ingredientFormContainer.getChildAt(i)
@@ -142,7 +141,7 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
                         ingredientsList.add(Ingredient(name, category, quantity, expDate))
                     } else {
                         // Handle the case where expDate is null
-                        Toast.makeText(this, "Please enter a valid expiration date for all ingredients.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Please enter a valid expiration date for all ingredients.", Toast.LENGTH_LONG).show()
                         return@setOnClickListener
                     }
                 }
@@ -150,39 +149,6 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
             }
         }
     }
-
-
-    private fun checkAllForms(): Boolean {
-        var allFilled = true
-        for (i in 0 until binding.ingredientFormContainer.childCount) {
-            val ingredientView = binding.ingredientFormContainer.getChildAt(i)
-            val name = ingredientView.findViewById<EditText>(R.id.editTextName).text.toString()
-            val expDateEditText = ingredientView.findViewById<EditText>(R.id.editTextExpirationDate)
-            val expDate = expDateEditText.tag as? Date
-
-            if (name.isEmpty() || expDate == null) {
-                allFilled = false
-                if (name.isEmpty()) {
-                    ingredientView.findViewById<EditText>(R.id.editTextName).apply {
-                        requestFocus()
-                        setBackgroundColor(Color.RED)
-                    }
-                }
-                if (expDate == null) {
-                    expDateEditText.apply {
-                        requestFocus()
-                        setBackgroundColor(Color.RED)
-                    }
-                    Toast.makeText(this, "Please fill in all fields and make sure dates are correct.", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                ingredientView.findViewById<EditText>(R.id.editTextName).setBackgroundColor(Color.TRANSPARENT)
-                expDateEditText.setBackgroundColor(Color.TRANSPARENT)
-            }
-        }
-        return allFilled
-    }
-
 
     // 완료 후 HomeActivity 로 돌아가서 실시간 업데이트 내용 확인
     private fun saveIngredientsToFirestore(userEmail: String, ingredients: List<Ingredient>) {
@@ -196,6 +162,50 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    private fun validateInputs(): Boolean {
+        var isValid = true
+
+        for (i in 0 until binding.ingredientFormContainer.childCount) {
+            val ingredientView = binding.ingredientFormContainer.getChildAt(i)
+
+            // Name validation
+            val nameEditText = ingredientView.findViewById<EditText>(R.id.editTextName)
+            if (nameEditText.text.isNullOrEmpty()) {
+                nameEditText.error = "This field is required"
+                isValid = false
+            }
+
+            // Category validation
+            val categorySpinner = ingredientView.findViewById<Spinner>(R.id.spinnerCategory)
+            if (categorySpinner.selectedItem == null) {
+                Toast.makeText(this, "Please select a category", Toast.LENGTH_LONG).show()
+                isValid = false
+            }
+
+            // Quantity validation
+            val quantitySpinner = ingredientView.findViewById<Spinner>(R.id.spinnerQuantity)
+            if (quantitySpinner.selectedItem == null || quantitySpinner.selectedItem.toString().toIntOrNull() == null) {
+                Toast.makeText(this, "Please select a quantity", Toast.LENGTH_LONG).show()
+                isValid = false
+            }
+
+            // Expiration date validation
+            val expDateEditText = ingredientView.findViewById<EditText>(R.id.editTextExpirationDate)
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            try {
+                val date = dateFormat.parse(expDateEditText.text.toString())
+                if (date == null || date.before(Date())) {
+                    expDateEditText.error = "Please enter a valid future date"
+                    isValid = false
+                }
+            } catch (e: ParseException) {
+                expDateEditText.error = "Please enter a valid date in format YYYY-MM-DD"
+                isValid = false
+            }
+        }
+
+        return isValid
     }
 
     private fun navigateBackToHome() {

@@ -141,6 +141,7 @@ class HomeActivity : AppCompatActivity() {
                 ingredientsList.clear()
                 for (document in snapshot.documents) {
                     val ingredient = document.toObject(Ingredient::class.java)
+                    ingredient?.documentId = document.id // 각 식재료 별 업데이트할때 필요한 식재료 ID
                     ingredient?.let { ingredientsList.add(it) }
                 }
                 ingredientsList.sortBy { it.daysUntilExpired }

@@ -1,10 +1,12 @@
 package com.example.fridgeguardian
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fridgeguardian.databinding.IngredientItemFormBinding
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.ArrayList
 import java.util.Calendar
@@ -17,7 +19,8 @@ data class Ingredient(
     var category: String = "",
     var quantity: Int = 0,
     var expDate: Date? = null
-) {
+) : Serializable {
+    var documentId: String = ""
     val daysUntilExpired: Int
         get() {
             val today = Calendar.getInstance().time
@@ -52,6 +55,17 @@ class IngredientAdapter(private val ingredientsList: ArrayList<Ingredient>) :
             ingredientDDay.text = "D-${ingredient.daysUntilExpired}"
 
             ingredientDDay.setTextColor(if (ingredient.daysUntilExpired <= 5) Color.RED else Color.BLACK)
+        }
+
+        // 식재료 별 수정하는 버튼, 각 식재료에 대한 정보 EDIT ACTIVITY 로 전달
+        holder.binding.ingredientEditButton.setOnClickListener {
+            val context = holder.itemView.context
+            val ingredient = ingredientsList[position]
+            val intent = Intent(context, IngredientEditActivity::class.java).apply {
+                putExtra("ingredient", ingredient)
+                putExtra("ingredientId", ingredient.documentId)
+            }
+            context.startActivity(intent)
         }
     }
 
