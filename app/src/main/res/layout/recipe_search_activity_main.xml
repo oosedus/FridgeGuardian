@@ -1,15 +1,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="#EEEEEE">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:elevation="4dp">
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -19,23 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="#FFFFFFFF"
-        app:menu="@menu/bottom_navigation_menu"
         app:itemIconTint="#FF000000"
-        app:itemTextColor="#FF000000" />
-
-    <EditText
-        android:id="@+id/SearchText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="-3dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="102dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name" />
+        app:itemTextColor="#FF000000"
+        app:menu="@menu/bottom_navigation_menu" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -47,28 +33,31 @@
         app:titleTextColor="#FF000000" />
 
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/SearchText"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="281dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="18dp"
-        android:text="Button" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_recycler_view"
-        android:layout_width="wrap_content"
-        android:layout_height="437dp"
-        android:layout_below="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="522dp"
+        android:layout_below="@+id/search"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="5dp" />
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="3dp" />
+
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/recipe_searchview_background"
+        android:focusable="true"
+        android:padding="20dp"
+        android:queryBackground="@android:color/transparent"
+        android:textSize="16sp"
+        app:iconifiedByDefault="false"
+        app:queryHint="검색어를 입력하시오"
+        android:theme="@style/AppTheme" />
 
 
 </RelativeLayout>

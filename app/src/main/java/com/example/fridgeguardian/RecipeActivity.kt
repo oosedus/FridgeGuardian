@@ -18,6 +18,7 @@ class RecipeActivity : AppCompatActivity(){
         setSupportActionBar(toolbar)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.navigation)
+        bottomNav.selectedItemId = R.id.nav_recipe
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -26,6 +27,8 @@ class RecipeActivity : AppCompatActivity(){
                     true
                 }
                 R.id.nav_recipe -> {
+                    val intent = Intent(this, RecipeActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.nav_community -> {
@@ -56,13 +59,13 @@ class RecipeActivity : AppCompatActivity(){
     private fun goToRecipeSearchScreen() {
         val intent = Intent(this, RecipeSearchActivity::class.java)
         startActivity(intent)
-        finish()
+
     }
 
     private fun goToBookmarkScreen() {
         val intent = Intent(this, BookmarkActivity::class.java)
         startActivity(intent)
-        finish()
+
     }
 
 
