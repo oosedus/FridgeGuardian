@@ -24,7 +24,6 @@ class IntroActivity : AppCompatActivity() {
             goToMainScreen()
         }
 
-
         binding.loginBtn.setOnClickListener {
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)

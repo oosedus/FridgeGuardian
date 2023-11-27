@@ -7,17 +7,11 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.PopupWindow
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.fridgeguardian.databinding.HomeActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -130,25 +124,32 @@ class HomeActivity : AppCompatActivity() {
     }
 
     // Firestore에 있는 식재료 가져와서 보여주기(RecyclerView 사용)
+    // 식재료가 앱 내에서 등록되었을때 실시간으로 업데이트 되도록 수정
     private fun setupRecyclerView(userEmail: String) {
         val recyclerView = binding.rvIngredients
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        firestore.collection("users").document(userEmail).collection("ingredients")
-            .get()
-            .addOnSuccessListener { documents ->
+        val collectionReference = firestore.collection("users").document(userEmail).collection("ingredients")
+        collectionReference.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w("HomeActivity", "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null) {
                 ingredientsList.clear()
-                for (document in documents) {
+                for (document in snapshot.documents) {
                     val ingredient = document.toObject(Ingredient::class.java)
-                    ingredientsList.add(ingredient)
+                    ingredient?.documentId = document.id // 각 식재료 별 업데이트할때 필요한 식재료 ID
+                    ingredient?.let { ingredientsList.add(it) }
                 }
-                ingredientsList.sortBy { it.daysUntilExpired } // 처음에는 오름차순 정렬로 설정
+                ingredientsList.sortBy { it.daysUntilExpired }
                 adapter.notifyDataSetChanged()
+            } else {
+                Log.d("HomeActivity", "Current data: null")
             }
-            .addOnFailureListener { exception ->
-                Log.w("HomeActivity", "Error getting documents: ", exception)
-            }
+        }
     }
 }
 

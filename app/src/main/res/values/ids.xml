@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="spinnerCategory" type="id" />
+    <item name="editTextName" type="id" />
+    <item name="spinnerQuantity" type="id" />
+    <item name="editTextExpirationDate" type="id" />
+    <item name="buttonAddMore" type="id" />
+    <item name="buttonRemove" type="id" />
+</resources>
