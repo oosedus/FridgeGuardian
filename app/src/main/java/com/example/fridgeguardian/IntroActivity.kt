@@ -12,17 +12,17 @@ import com.google.firebase.auth.auth
 
 class IntroActivity : AppCompatActivity() {
     private lateinit var binding : ActivityIntroBinding
-    private lateinit var auth: FirebaseAuth
+//    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_intro)
-        auth = Firebase.auth
+//        auth = Firebase.auth
 
-        if (auth.currentUser != null) {
-            goToMainScreen()
-        }
+//        if (auth.currentUser != null) {
+//            goToMainScreen()
+//        }
 
         binding.loginBtn.setOnClickListener {
             val intent = Intent(this,LoginActivity::class.java)
@@ -36,10 +36,10 @@ class IntroActivity : AppCompatActivity() {
 
     }
 
-    private fun goToMainScreen() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
+//    private fun goToMainScreen() {
+//        val intent = Intent(this, HomeActivity::class.java)
+//        startActivity(intent)
+//        finish()
+//    }
 
 }

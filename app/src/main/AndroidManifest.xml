@@ -55,6 +55,7 @@
         <activity android:name=".KeyboardRegistrationActivity" />
         <activity android:name=".VoiceRegistrationActivity"/>
         <activity android:name=".IngredientEditActivity"/>
+        <activity android:name=".RecipeSearchWithIngredientActivity"/>
     </application>
 
 </manifest>

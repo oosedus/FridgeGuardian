@@ -12,20 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.Timestamp
+import java.util.Date
 
-class BookmarkActivity : AppCompatActivity() {
+class RecipeSearchWithIngredientActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.bookmark_activity_main)
+        setContentView(R.layout.recipe_search_ingredient_activity)
 
-        Log.d("ITM", "Proceed22")
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        toolbar.title = "Bookmark"
+        toolbar.title = "Recipe"
         setSupportActionBar(toolbar)
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.navigation)
@@ -54,49 +52,72 @@ class BookmarkActivity : AppCompatActivity() {
             }
         }
 
-        Log.d("ITM", "Proceed0")
         val firebaseAuth = FirebaseAuth.getInstance()
         val currentUser = firebaseAuth.currentUser
 
         val db = FirebaseFirestore.getInstance()
 
-        val bookmarksList: MutableList<Pair<String, Any>> = mutableListOf()
-
+        val ingredients: MutableList<Triple<String, String, Date>> = mutableListOf()
         if (currentUser != null) {
-            val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email
-            val bookmarksRef = db.collection("users").document("${currentUserEmail}").collection("Bookmarks")
-            bookmarksRef.get().addOnSuccessListener { result ->
-                Log.d("ITM", "succeess")
-                for (document in result) {
-                    val bookmark = document.id
-                    val bookmarkValue = document.data as Map<String, Any>
 
-                    Log.d("ITM", "succeess2")
-                    bookmarksList.add(Pair(bookmark, bookmarkValue))
+            val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email
+            Log.d("ITM", "Recipe1")
+
+            val ingredientsref = db.collection("users").document("${currentUserEmail}").collection("ingredients")
+            Log.d("ITM", "Recipe2")
+            ingredientsref.get().addOnSuccessListener { result ->
+                for (document in result) {
+                    val documentid = document.id
+                    Log.d("ITM", "$documentid")
+                    val documentdata = document.data as Map<String, Any>
+                    Log.d("ITM", "$documentdata")
+                    val name = documentdata["name"] as String?
+                    Log.d("ITM", "$name")
+                    val timestamp = documentdata["expDate"] as Timestamp?
+                    val date = timestamp?.toDate()  // Convert Timestamp to Date
+                    Log.d("ITM", "$date")
+
+                    // !! 는 절대 null이 아니라는 걸 나타냄
+                    ingredients.add(Triple(documentid, name!!, date!!))
+                    Log.d("ITM", "Recipe4")
 
                 }
-                val recyclerView = findViewById<RecyclerView>(R.id.bookmark_recycler_view)
+
+                val recyclerView = findViewById<RecyclerView>(R.id.ingredient_search_recyclerview)
+                Log.d("ITM", "Recipe5")
                 val itemMargin = RecyclerviewMargin()
                 recyclerView.addItemDecoration(itemMargin)
-                val adapter = BookmarkAdapter(bookmarksList, this@BookmarkActivity)
-                recyclerView.layoutManager = LinearLayoutManager(this@BookmarkActivity)
+                Log.d("ITM", "Recipe6")
+                val adapter = IngredientSearchAdapter(ingredients, this@RecipeSearchWithIngredientActivity)
+                Log.d("ITM", "Recipe7")
+                recyclerView.layoutManager = LinearLayoutManager(this@RecipeSearchWithIngredientActivity)
+                Log.d("ITM", "Recipe8")
                 recyclerView.adapter = adapter
 
+                val button: Button = findViewById(R.id.button)
+                button.setOnClickListener {
+                    val selectedIngredients = adapter.getSelectedIngredients()  // 선택된 항목의 제목 리스트 가져오기
+                    Log.d("ITM", "$selectedIngredients")
+//                    val intent = Intent(this, OtherActivity::class.java)
+//                    intent.putStringArrayListExtra("selectedIngredients", ArrayList(selectedIngredients))  // Intent에 담기
+//                    startActivity(intent)  // 다른 액티비티 시작
+                }
+
                 // 리소스에서 Divider Drawable 가져오기
-                val divider = ContextCompat.getDrawable(this@BookmarkActivity, R.drawable.divider)
+                val divider = ContextCompat.getDrawable(this@RecipeSearchWithIngredientActivity, R.drawable.divider)
 
                 divider?.let {
-                    val dividerItemDecoration = DividerItemDecoration(this@BookmarkActivity, RecyclerView.VERTICAL)
+                    val dividerItemDecoration = DividerItemDecoration(this@RecipeSearchWithIngredientActivity, RecyclerView.VERTICAL)
                     dividerItemDecoration.setDrawable(it)
                     recyclerView.addItemDecoration(dividerItemDecoration)
                 }
-
-
-
-                Log.d("ITM", "finished")
             }.addOnFailureListener { exception ->
                 Log.d("ITM", "데이터 로드 실패: ${exception.message}")
             }
+
         }
+
+
+
     }
 }
