@@ -21,6 +21,31 @@
             app:titleTextColor="#FF000000" />
     </com.google.android.material.appbar.AppBarLayout>
 
+    <ImageView
+        android:id="@+id/sortButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/imageview_click_selector"
+        android:clickable="true"
+        android:focusable = "true"
+        android:contentDescription="SORT!"
+        android:src="@drawable/ingredient_sorting_button" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/fabRegister"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginTop="60dp"
+        android:clipToPadding="false"
+        android:padding="16dp"
+        android:scrollbars="vertical" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -30,5 +55,25 @@
         app:menu="@menu/bottom_navigation_menu"
         app:itemIconTint="#FF000000"
         app:itemTextColor="#FF000000" />
-</RelativeLayout>
 
+    <!--등록 버튼 추가-->
+    <ImageView
+        android:id="@+id/fabRegister"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/navigation"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="15dp"
+        android:contentDescription="REGISTRATION!"
+        app:elevation="0dp"
+        app:layout_anchor="@id/rvIngredients"
+        app:layout_anchorGravity="bottom|end|right"
+        android:background="@drawable/imageview_click_selector"
+        android:clickable="true"
+        android:focusable = "true"
+        app:srcCompat="@drawable/ingredient_register_button" />
+
+</RelativeLayout>

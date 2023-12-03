@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#EEEEEE">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFFFF"
+        app:itemIconTint="#FF000000"
+        app:itemTextColor="#FF000000"
+        app:menu="@menu/bottom_navigation_menu" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFFFF"
+        android:textAlignment="center"
+        app:contentInsetStart="25dp"
+        app:titleTextColor="#FF000000" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipe_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="522dp"
+        android:layout_below="@+id/search"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="3dp" />
+
+    <SearchView
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/recipe_searchview_background"
+        android:focusable="true"
+        android:padding="20dp"
+        android:queryBackground="@android:color/transparent"
+        android:textSize="16sp"
+        app:iconifiedByDefault="false"
+        app:queryHint="검색어를 입력하시오"
+        android:theme="@style/AppTheme" />
+
+
+</RelativeLayout>
+
