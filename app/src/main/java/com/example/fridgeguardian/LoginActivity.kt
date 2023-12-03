@@ -33,10 +33,10 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-
-                        val intent = Intent(this,MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                        startActivity(intent)
+//
+//                        val intent = Intent(this,MainActivity::class.java)
+//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+//                        startActivity(intent)
 
                         Toast.makeText(this,"Success to Log In",Toast.LENGTH_LONG).show()
 

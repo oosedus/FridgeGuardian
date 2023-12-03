@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 
+
 class BookmarkAdapter(private val bookmarksList: List<Pair<String, Any>>, private val context: Context) : RecyclerView.Adapter<BookmarkAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -79,7 +80,7 @@ class BookmarkAdapter(private val bookmarksList: List<Pair<String, Any>>, privat
             RCP_NA_TIP = temprecipe["저감 조리법 TIP"] as? String
         )
 
-        val options = RequestOptions()
+        val options = com.bumptech.glide.request.RequestOptions()
             .placeholder(R.drawable.foodexample) // 로드 중에 표시할 이미지
             .error(R.drawable.foodexample2) // 에러 발생 시 표시할 이미지
 
@@ -90,7 +91,7 @@ class BookmarkAdapter(private val bookmarksList: List<Pair<String, Any>>, privat
                 override fun onLoadFailed(
                     e: GlideException?,
                     model: Any?,
-                    target: com.bumptech.glide.request.target.Target<Drawable>?,
+                    target: Target<Drawable>?,
                     isFirstResource: Boolean
                 ): Boolean {
                     Log.d("ITM", "Image load failed")
@@ -99,7 +100,7 @@ class BookmarkAdapter(private val bookmarksList: List<Pair<String, Any>>, privat
                 override fun onResourceReady(
                     resource: Drawable?,
                     model: Any?,
-                    target: Target<Drawable>?,
+                    target: Target<Drawable?>,
                     dataSource: com.bumptech.glide.load.DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {

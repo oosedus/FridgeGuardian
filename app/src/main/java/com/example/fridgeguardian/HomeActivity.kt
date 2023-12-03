@@ -109,7 +109,7 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_community -> {
-                    startActivity(Intent(this, CommunityActivity::class.java))
+                    startActivity(Intent(this, CommunityMainActivity::class.java))
                     true
                 }
 
@@ -152,4 +152,3 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 }
-
