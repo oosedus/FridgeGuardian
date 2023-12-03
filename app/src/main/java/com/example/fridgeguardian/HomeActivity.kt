@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_community -> {
-                    val intent = Intent(this, CommunityActivity::class.java)
+                    val intent = Intent(this, CommunityMainActivity::class.java)
                     startActivity(intent)
                     true
                 }

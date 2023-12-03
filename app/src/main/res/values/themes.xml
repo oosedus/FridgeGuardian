@@ -3,6 +3,8 @@
     <style name="Base.Theme.FridgeGuardian" parent="Theme.AppCompat.Light">
         <!-- Customize your light theme here. -->
         <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/mainColor_insun</item>
+        <item name="colorPrimaryDark">@color/mainColor_insun</item>
         <item name="colorPrimaryVariant">@color/mainColor_insun</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
