@@ -1,4 +1,4 @@
-package com.example.fridgeguardian
+package home
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -12,6 +12,11 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fridgeguardian.CommunityActivity
+import com.example.fridgeguardian.CommunityMainActivity
+import com.example.fridgeguardian.MyPageActivity
+import com.example.fridgeguardian.R
+import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.ActivityKeyboardRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,6 +37,7 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
         setupToolbar()
+        setupBottomNavigationView()
         addIngredientForm()
         handleFinishButton()
     }
@@ -79,6 +85,30 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
             removeButton.isClickable = false
             removeButton.isEnabled = false
             removeButton.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setupBottomNavigationView() {
+        binding.navigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> true
+                R.id.nav_recipe -> {
+                    startActivity(Intent(this, RecipeActivity::class.java))
+                    true
+                }
+
+                R.id.nav_community -> {
+                    startActivity(Intent(this, CommunityMainActivity::class.java))
+                    true
+                }
+
+                R.id.nav_mypage -> {
+                    startActivity(Intent(this, MyPageActivity::class.java))
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 

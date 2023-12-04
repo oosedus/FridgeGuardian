@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -53,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-                  android:name=".HomeActivity"
+                  android:name="home.HomeActivity"
                   android:launchMode="singleTop"/>
         <activity android:name=".RecipeActivity" />
         <activity android:name=".CommunityActivity" />
@@ -61,9 +62,9 @@
         <activity android:name=".RecipeSearchActivity"/>
         <activity android:name=".RecipeDetailActivity"/>
         <activity android:name=".BookmarkActivity"/>
-        <activity android:name=".KeyboardRegistrationActivity" />
-        <activity android:name=".VoiceRegistrationActivity"/>
-        <activity android:name=".IngredientEditActivity"/>
+        <activity android:name="home.KeyboardRegistrationActivity" />
+        <activity android:name="home.VoiceRegistrationActivity"/>
+        <activity android:name="home.IngredientEditActivity"/>
     </application>
 
 </manifest>

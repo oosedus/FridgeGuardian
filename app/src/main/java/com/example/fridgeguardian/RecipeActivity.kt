@@ -2,11 +2,11 @@ package com.example.fridgeguardian
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import home.HomeActivity
 
 class RecipeActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
