@@ -11,6 +11,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import home.HomeActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth

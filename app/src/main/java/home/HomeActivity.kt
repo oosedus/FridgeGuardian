@@ -1,4 +1,4 @@
-package com.example.fridgeguardian
+package home
 
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,10 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fridgeguardian.CommunityMainActivity
+import com.example.fridgeguardian.MyPageActivity
+import com.example.fridgeguardian.R
+import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.HomeActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
