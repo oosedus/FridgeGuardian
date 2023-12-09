@@ -30,19 +30,63 @@
         app:itemTextColor="#FF000000"
         app:menu="@menu/bottom_navigation_menu" />
 
+
     <ImageButton
-        android:id="@+id/btnStart"
+        android:id="@+id/btnPause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/navigation"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dp"
         android:background="@drawable/imageview_click_selector"
-        android:text="START"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/voice_record_start_icon"/>
+        android:src="@drawable/voice_record_pause_icon"
+        android:text="PAUSE"
+        android:visibility="visible" />
 
+    <ImageButton
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/btnPause"
+        android:layout_alignTop="@id/btnPause"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/imageview_click_selector"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/voice_record_start_icon"
+        android:text="START"
+        android:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/btnPause"
+        android:layout_alignTop="@id/btnPause"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/imageview_click_selector"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/voice_record_stop_icon"
+        android:text="STOP"
+        android:visibility="visible" />
+
+
+    <ImageButton
+        android:id="@+id/btnRegistration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/navigation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="82dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/imageview_click_selector"
+        android:clickable="false"
+        android:focusable="false"
+        android:src="@drawable/voice_stt_registration_button"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/textView6"
@@ -123,5 +167,13 @@
         android:layout_marginTop="50dp"
         android:text="Start Voice Recognition" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
 </RelativeLayout>
+
+
