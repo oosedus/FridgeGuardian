@@ -16,7 +16,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.example.fridgeguardian.CommunityMainActivity
-import com.example.fridgeguardian.MyPageActivity
+import Account.MyPageActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
 import kotlinx.coroutines.Dispatchers
@@ -241,6 +241,7 @@ class VoiceRegistrationActivity : AppCompatActivity() {
 
 
     private fun setupBottomNavigationView() {
+        binding.navigation.selectedItemId = R.id.nav_home
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> true

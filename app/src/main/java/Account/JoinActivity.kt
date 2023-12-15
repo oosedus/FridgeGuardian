@@ -1,17 +1,19 @@
-package com.example.fridgeguardian
+package Account
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import com.example.fridgeguardian.MainActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.databinding.ActivityJoinBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import java.security.KeyStore.TrustedCertificateEntry
+import home.HomeActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class JoinActivity : AppCompatActivity() {
 
@@ -89,10 +91,17 @@ class JoinActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(email, password1)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            val user = User(email, name, nickname, phonenumber)
+
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                val db = AppDatabase.getDatabase(applicationContext)
+                                db.userDao().insertUser(user)
+                            }
+
                             Toast.makeText(this,"Success to sign up",Toast.LENGTH_LONG).show()
 
-                            //회원가입 성공하면 MainActivity로 넘어가게 하는거
-                            val intent = Intent(this,MainActivity::class.java)
+                            //회원가입 성공하면 HomeActivity로 넘어가게 하는거
+                            val intent = Intent(this, HomeActivity::class.java)
 
                             //근데 회원가입 성공 -> mainactivity로 넘어가 -> 뒤로가기 버튼 눌러 = 회원가입 화면인데,
                             //이를 회원가입 성공 -> mainactivity로 넘어가 -> 뒤로가기 버튼 눌러 = 앱 종료 가 되게 하는 부분임 아래는

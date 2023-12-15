@@ -1,4 +1,4 @@
-package com.example.fridgeguardian
+package Account
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +10,7 @@ import com.example.fridgeguardian.databinding.ActivityLoginBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import home.HomeActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -33,15 +34,12 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-//
-//                        val intent = Intent(this,MainActivity::class.java)
-//                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-//                        startActivity(intent)
-
                         Toast.makeText(this,"Success to Log In",Toast.LENGTH_LONG).show()
+                        val intent = Intent(this, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                        startActivity(intent)
 
                     } else {
-
                         Toast.makeText(this,"Fail to Log In",Toast.LENGTH_LONG).show()
                     }
                 }

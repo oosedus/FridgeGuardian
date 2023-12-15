@@ -12,7 +12,7 @@ import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fridgeguardian.CommunityMainActivity
-import com.example.fridgeguardian.MyPageActivity
+import Account.MyPageActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.HomeActivityMainBinding
@@ -104,6 +104,7 @@ class HomeActivity : AppCompatActivity() {
 
     // 네비게이션 보여주는 것 함수로 간단하게 바꿈
     private fun setupBottomNavigationView() {
+        binding.navigation.selectedItemId = R.id.nav_home
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> true
