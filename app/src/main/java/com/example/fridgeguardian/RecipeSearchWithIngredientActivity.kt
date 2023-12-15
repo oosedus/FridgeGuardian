@@ -68,39 +68,29 @@ class RecipeSearchWithIngredientActivity : AppCompatActivity() {
             ingredientsref.get().addOnSuccessListener { result ->
                 for (document in result) {
                     val documentid = document.id
-                    Log.d("ITM", "$documentid")
                     val documentdata = document.data as Map<String, Any>
-                    Log.d("ITM", "$documentdata")
                     val name = documentdata["name"] as String?
-                    Log.d("ITM", "$name")
                     val timestamp = documentdata["expDate"] as Timestamp?
                     val date = timestamp?.toDate()  // Convert Timestamp to Date
-                    Log.d("ITM", "$date")
 
                     // !! 는 절대 null이 아니라는 걸 나타냄
                     ingredients.add(Triple(documentid, name!!, date!!))
-                    Log.d("ITM", "Recipe4")
 
                 }
 
                 val recyclerView = findViewById<RecyclerView>(R.id.ingredient_search_recyclerview)
-                Log.d("ITM", "Recipe5")
                 val itemMargin = RecyclerviewMargin()
                 recyclerView.addItemDecoration(itemMargin)
-                Log.d("ITM", "Recipe6")
                 val adapter = IngredientSearchAdapter(ingredients, this@RecipeSearchWithIngredientActivity)
-                Log.d("ITM", "Recipe7")
                 recyclerView.layoutManager = LinearLayoutManager(this@RecipeSearchWithIngredientActivity)
-                Log.d("ITM", "Recipe8")
                 recyclerView.adapter = adapter
 
                 val button: Button = findViewById(R.id.button)
                 button.setOnClickListener {
                     val selectedIngredients = adapter.getSelectedIngredients()  // 선택된 항목의 제목 리스트 가져오기
-                    Log.d("ITM", "$selectedIngredients")
-//                    val intent = Intent(this, OtherActivity::class.java)
-//                    intent.putStringArrayListExtra("selectedIngredients", ArrayList(selectedIngredients))  // Intent에 담기
-//                    startActivity(intent)  // 다른 액티비티 시작
+                    val intent = Intent(this, RecipeSearchWithIngredientActivityDetail::class.java)
+                    intent.putStringArrayListExtra("selectedIngredients", ArrayList(selectedIngredients))  // Intent에 담기
+                    startActivity(intent)  // 다른 액티비티 시작
                 }
 
                 // 리소스에서 Divider Drawable 가져오기
