@@ -3,10 +3,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="mainColor">#303F9E</color>
-    <color name="mainColor_insun">#FDFEB7</color>
+    <color name="mainColor_insun">#FDFFB6</color>
     <color name="black_overlay">#66000000</color> <!-- 클릭 효과 40% black -->
     <color name="divider_Color">#A89595</color>
-    <color name="c_maincolor">#C6FFC3</color>
-    <color name="c_cstatus">#009900</color>
+    <color name="c_maincolor">#DEFDE0</color>
+    <color name="c_cstatus">#47E1A8</color>
+
+
+    <color name="lightred">#F48A94</color>
+    <color name="lightblue">#92C9FF</color>
 
 </resources>

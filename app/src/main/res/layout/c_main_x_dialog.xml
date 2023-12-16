@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <Button
+        android:id="@+id/yesButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="YES"
+        android:backgroundTint="@color/lightred"
+        android:background="@drawable/background_radius"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/noButton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="NO"
+        android:backgroundTint="@color/lightblue"
+        android:background="@drawable/background_radius"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
+
+</LinearLayout>

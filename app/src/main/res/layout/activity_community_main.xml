@@ -18,23 +18,33 @@
 
             <ImageView
                 android:id="@+id/c_main"
-                android:layout_width="200dp"
-                android:layout_height="64dp"
+                android:layout_width="166dp"
+                android:layout_height="61dp"
                 android:layout_margin="5dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:src="@drawable/c_tlogo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/c_settingBtn"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="60dp"
+                android:src="@drawable/c_setting"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <ImageView
                 android:id="@+id/c_close"
-                android:layout_width="35dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="3dp"
                 android:layout_marginRight="20dp"
-
                 android:src="@drawable/c_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -42,14 +52,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#999999"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topbar">
-
-        </LinearLayout>
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
@@ -59,7 +61,7 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/com_main_nav"
             android:layout_marginTop="70dp"
-             />
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
