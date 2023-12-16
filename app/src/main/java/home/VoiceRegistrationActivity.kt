@@ -16,7 +16,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.example.fridgeguardian.CommunityMainActivity
-import Account.MyPageActivity
+import account.MyPageActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
 import kotlinx.coroutines.Dispatchers

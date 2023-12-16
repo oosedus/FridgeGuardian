@@ -1,10 +1,11 @@
-package Account
+package account
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation.findNavController
 import com.example.fridgeguardian.CommunityMainActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
@@ -15,6 +16,7 @@ import com.google.firebase.auth.auth
 import home.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MyPageActivity : AppCompatActivity() {
 
@@ -33,9 +35,17 @@ class MyPageActivity : AppCompatActivity() {
 
         setupBottomNavigationView()
 
-//        binding.btnProfileEdit.setOnClickListener {
-//            findNavController().navigate(R.id.action_myPageFragment_to_profileEditFragment)
-//        }
+        binding.btnProfileEdit.setOnClickListener {
+            binding.fragmentContainer.visibility = View.VISIBLE
+            binding.btnLogout.visibility = View.GONE
+            binding.btnDeleteAccount.visibility = View.GONE
+            // Navigate to Profile Edit Fragment
+            val fragment = ProfileEditFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
 
         binding.btnLogout.setOnClickListener {
             auth.signOut() // Firebase 로그아웃
@@ -45,11 +55,24 @@ class MyPageActivity : AppCompatActivity() {
             finish()
         }
 
-//        binding.btnDeleteAccount.setOnClickListener {
-//            // Delete Firebase user and related data in RoomDB
-//            deleteAccount()
-//        }
+        supportFragmentManager.addOnBackStackChangedListener {
+            if (supportFragmentManager.backStackEntryCount == 0) {
+                binding.btnLogout.visibility = View.VISIBLE
+                binding.btnDeleteAccount.visibility = View.VISIBLE
+            }
+        }
 
+        binding.btnDeleteAccount.setOnClickListener {
+            // Delete Firebase user and related data in RoomDB
+            deleteAccount()
+        }
+
+        displayUserInfo()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh user info when returning to the activity
         displayUserInfo()
     }
 
@@ -72,27 +95,27 @@ class MyPageActivity : AppCompatActivity() {
         }
     }
 
-//    private fun deleteAccount() {
-//        val user = auth.currentUser
-//        user?.delete()?.addOnCompleteListener { task ->
-//            if (task.isSuccessful) {
-//                // Delete user data from RoomDB
-//                lifecycleScope.launch(Dispatchers.IO) {
-//                    val db = AppDatabase.getDatabase(applicationContext)
-//                    user.email?.let { db.userDao().deleteUserByEmail(it) }
-//                    // Redirect to login after deletion from RoomDB
-//                    withContext(Dispatchers.Main) {
-//                        val intent = Intent(this@MyPageActivity, LoginActivity::class.java)
-//                        startActivity(intent)
-//                        finish()
-//                    }
-//                }
-//            }
-//        }?.addOnFailureListener {
-//            // Handle failure, log the error or notify the user
-//            Toast.makeText(this, "Failed to delete account: ${it.message}", Toast.LENGTH_SHORT).show()
-//        }
-//    }
+    private fun deleteAccount() {
+        val user = auth.currentUser
+        user?.delete()?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                // Delete user data from RoomDB
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val db = AppDatabase.getDatabase(applicationContext)
+                    user.email?.let { db.userDao().deleteUserByEmail(it) }
+                    // Redirect to login after deletion from RoomDB
+                    withContext(Dispatchers.Main) {
+                        val intent = Intent(this@MyPageActivity, SplashActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }
+        }?.addOnFailureListener {
+            // Handle failure, log the error or notify the user
+            Toast.makeText(this, "Failed to delete` account: ${it.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun setupBottomNavigationView() {
         binding.navigation.selectedItemId = R.id.nav_mypage

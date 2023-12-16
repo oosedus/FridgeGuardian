@@ -30,16 +30,16 @@
             android:name=".CommunityMainActivity"
             android:exported="false" />
         <activity
-            android:name="Account.LoginActivity"
+            android:name="account.LoginActivity"
             android:exported="false" />
         <activity
-            android:name="Account.JoinActivity"
+            android:name="account.JoinActivity"
             android:exported="false" />
         <activity
-            android:name="Account.IntroActivity"
+            android:name="account.IntroActivity"
             android:exported="false" />
         <activity
-            android:name="Account.SplashActivity"
+            android:name="account.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,7 +52,7 @@
             android:launchMode="singleTop" />
         <activity android:name=".RecipeActivity" />
         <activity android:name=".CommunityActivity" />
-        <activity android:name="Account.MyPageActivity" />
+        <activity android:name="account.MyPageActivity" />
         <activity android:name=".RecipeSearchActivity" />
         <activity android:name=".RecipeDetailActivity" />
         <activity android:name=".BookmarkActivity" />

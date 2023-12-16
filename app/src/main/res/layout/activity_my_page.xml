@@ -152,6 +152,12 @@
         android:background="@drawable/mypage_btn_selector"
         android:text="Delete Account" />
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
 </RelativeLayout>
 
 

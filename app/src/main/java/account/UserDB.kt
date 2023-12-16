@@ -1,4 +1,4 @@
-package Account
+package account
 
 import android.content.Context
 import androidx.room.Database

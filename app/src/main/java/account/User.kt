@@ -1,4 +1,4 @@
-package Account
+package account
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

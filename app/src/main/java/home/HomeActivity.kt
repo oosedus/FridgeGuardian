@@ -12,7 +12,7 @@ import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.fridgeguardian.CommunityMainActivity
-import Account.MyPageActivity
+import account.MyPageActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.HomeActivityMainBinding

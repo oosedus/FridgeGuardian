@@ -1,9 +1,10 @@
-package Account
+package account
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 
 @Dao
 interface UserDao {
@@ -13,6 +14,9 @@ interface UserDao {
     @Query("SELECT * FROM User WHERE email = :email")
     fun getUserByEmail(email: String): User? // Returns a single User or null
 
-//    @Query("DELETE FROM user WHERE email = :email")
-//    suspend fun deleteUserByEmail(email: String): Int
+    @Update
+    suspend fun updateUser(user: User): Int
+
+    @Query("DELETE FROM user WHERE email = :email")
+    suspend fun deleteUserByEmail(email: String): Int
 }

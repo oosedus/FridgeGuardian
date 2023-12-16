@@ -1,4 +1,4 @@
-package Account
+package account
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,9 +6,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.databinding.ActivityIntroBinding
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 import home.HomeActivity
 
 class IntroActivity : AppCompatActivity() {

@@ -11,7 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fridgeguardian.CommunityMainActivity
-import Account.MyPageActivity
+import account.MyPageActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.ActivityIngredientEditBinding
