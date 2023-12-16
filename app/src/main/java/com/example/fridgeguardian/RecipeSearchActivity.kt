@@ -1,6 +1,6 @@
 package com.example.fridgeguardian
 
-import Account.MyPageActivity
+import account.MyPageActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
