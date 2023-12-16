@@ -27,6 +27,13 @@ class RecipeDetailActivity : AppCompatActivity() {
         val currentUser = FirebaseAuth.getInstance().currentUser?.email
         Log.d("ITM", "${currentUser}")
 
+
+        val recipeName = recipe.RCP_NM
+
+
+
+
+
         val btnPlusBookmark = findViewById<Button>(R.id.bookmark)
         btnPlusBookmark.setOnClickListener {
             if (currentUser != null) {

@@ -1,0 +1,6 @@
+<!-- rounded_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#BFDEE2" /> <!-- 배경색 지정 -->
+    <corners android:radius="16dp" /> <!-- 모서리를 둥글게 설정 -->
+</shape>

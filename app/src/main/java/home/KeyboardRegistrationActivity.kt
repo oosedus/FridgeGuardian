@@ -12,14 +12,14 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fridgeguardian.CommunityActivity
 import com.example.fridgeguardian.CommunityMainActivity
-import com.example.fridgeguardian.MyPageActivity
+import account.MyPageActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.ActivityKeyboardRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import home.Ingredient
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -89,6 +89,7 @@ class KeyboardRegistrationActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationView() {
+        binding.navigation.selectedItemId = R.id.nav_home
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> true

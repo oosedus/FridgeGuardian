@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 Properties properties = new Properties()
@@ -29,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "17"
     }
     dataBinding{
         enabled true
@@ -48,6 +49,10 @@ android {
 }
 
 dependencies {
+    implementation("androidx.room:room-runtime:2.5.0")
+    annotationProcessor("androidx.room:room-compiler:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-ktx:2.6.1")
     implementation"com.google.firebase:firebase-database-ktx"
     implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
     implementation("com.google.firebase:firebase-analytics")
@@ -57,12 +62,16 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     // import Kotlin API client BOM
     implementation platform('com.aallam.openai:openai-client-bom:3.6.1')
 
     // define dependencies without versions
     implementation 'com.aallam.openai:openai-client'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.4.0'
     runtimeOnly 'io.ktor:ktor-client-okhttp'
 
     implementation("com.google.firebase:firebase-firestore")
@@ -80,18 +89,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
-
-
-
-
-
-
-
-
     //파이어베이스 storage, 커뮤니티에서 사용자의 이미지 업로드를 위해서
     implementation("com.google.firebase:firebase-storage")
 
     // 커뮤니티에서 사용자가 업로드한 이미지 다운로드를 위해서
     implementation 'com.firebaseui:firebase-ui-storage:7.2.0'
-
 }

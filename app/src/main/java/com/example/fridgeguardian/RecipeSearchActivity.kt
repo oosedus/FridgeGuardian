@@ -1,5 +1,6 @@
 package com.example.fridgeguardian
 
+import account.MyPageActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -88,15 +89,6 @@ class RecipeSearchActivity : AppCompatActivity() {
                             val adapter = RecipeAdapter(recipeData?.cookRcp01?.rows ?: listOf(), this@RecipeSearchActivity)
                             recyclerView.layoutManager = LinearLayoutManager(this@RecipeSearchActivity)
                             recyclerView.adapter = adapter
-
-                            // 리소스에서 Divider Drawable 가져오기
-                            val divider = ContextCompat.getDrawable(this@RecipeSearchActivity, R.drawable.divider)
-
-                            divider?.let {
-                                val dividerItemDecoration = DividerItemDecoration(this@RecipeSearchActivity, RecyclerView.VERTICAL)
-                                dividerItemDecoration.setDrawable(it)
-                                recyclerView.addItemDecoration(dividerItemDecoration)
-                            }
 
 
 

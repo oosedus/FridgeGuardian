@@ -10,7 +10,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fridgeguardian.CommunityMainActivity
-import com.example.fridgeguardian.MyPageActivity
+import account.MyPageActivity
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.ActivityVoiceDataEditBinding
@@ -44,6 +44,7 @@ class VoiceDataEditActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigationView() {
+        binding.navigation.selectedItemId = R.id.nav_home
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> true

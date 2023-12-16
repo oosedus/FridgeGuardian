@@ -29,7 +29,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookmark_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="615dp"
+        android:layout_height="770dp"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"

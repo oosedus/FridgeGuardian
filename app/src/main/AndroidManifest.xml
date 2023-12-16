@@ -11,10 +11,10 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.FridgeGuardian"
         android:usesCleartextTraffic="true"
@@ -44,16 +44,10 @@
             android:name=".CommunityMainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name="account.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".JoinActivity"
-            android:exported="false" />
-        <activity
-            android:name=".IntroActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashActivity"
+            android:name="account.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,26 +56,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name="account.JoinActivity"
+            android:exported="false" />
+        <activity
+            android:name="account.IntroActivity"
+            android:exported="false" />
         <activity
             android:name="home.HomeActivity"
             android:launchMode="singleTop" />
         <activity android:name=".RecipeActivity" />
         <activity android:name=".CommunityActivity" />
-        <activity android:name=".MyPageActivity" />
+        <activity android:name="account.MyPageActivity" />
         <activity android:name=".RecipeSearchActivity" />
         <activity android:name=".RecipeDetailActivity" />
         <activity android:name=".BookmarkActivity" />
+        <activity android:name=".RecipeSearchWithIngredientActivity"/>
+        <activity android:name=".RecipeSearchWithIngredientActivityDetail"/>
         <activity android:name="home.KeyboardRegistrationActivity" />
         <activity android:name="home.VoiceRegistrationActivity" />
         <activity android:name="home.IngredientEditActivity" />
     </application>
-
 </manifest>
