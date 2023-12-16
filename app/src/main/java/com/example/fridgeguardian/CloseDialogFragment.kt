@@ -20,7 +20,7 @@ class CloseDialogFragment : DialogFragment() {
             // YES button
             val yesButton: Button = view.findViewById(R.id.yesButton)
             yesButton.setOnClickListener {
-                val intent = Intent (it.context, HomeActivity::class.java)
+                val intent = Intent (it.context, home.HomeActivity::class.java)
                 it.context.startActivity(intent)
             }
 

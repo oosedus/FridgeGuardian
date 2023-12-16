@@ -1,6 +1,7 @@
 package c_fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,23 +9,28 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import c_contentsList.BookmarkRVAdapter
+import c_contentsList.ContentModel
 import com.example.fridgeguardian.R
 import com.example.fridgeguardian.databinding.FragmentHomeBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import utils.FBRef
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
 
+
+
+    val bookmarkIdList = mutableListOf<String>()
+    val items = ArrayList<ContentModel>()
+    val itemKeyList = ArrayList<String>()
+
+    lateinit var rvAdapter: BookmarkRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,7 +66,46 @@ class HomeFragment : Fragment() {
 
             Toast.makeText(context,"Clicked talk tap",Toast.LENGTH_LONG).show()
         }
+        rvAdapter = BookmarkRVAdapter(requireContext(), items, itemKeyList, bookmarkIdList)
+
+        val rv : RecyclerView = binding.mainRV
+        rv.adapter = rvAdapter
+
+        rv.layoutManager = GridLayoutManager(requireContext(),2)
+
+
+        getCategoryData()
+
         return binding.root
+    }
+
+    private fun getCategoryData(){
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                //원래는 데이터 스냅샷이 한 번에 뽑히는데, for문 통해서 분리해서 뽑는 부분
+                for (dataModel in dataSnapshot.children) {
+
+                    val item = dataModel.getValue(ContentModel::class.java)
+
+                    items.add(item!!)
+                    itemKeyList.add(dataModel.key.toString())
+
+                }
+                rvAdapter.notifyDataSetChanged()
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        FBRef.category1 .addValueEventListener(postListener)
+        FBRef.category2 .addValueEventListener(postListener)
+
+
+
     }
 
 
