@@ -8,5 +8,5 @@
     <color name="divider_Color">#A89595</color>
     <color name="c_maincolor">#C6FFC3</color>
     <color name="c_cstatus">#009900</color>
-
+    <color name="transparent">#00ff0000</color>
 </resources>
