@@ -43,8 +43,6 @@
     </LinearLayout>
 
 
-
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -57,7 +55,7 @@
             android:id="@+id/c_homeTap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_margin="13dp"
             android:layout_weight="1"
             android:src="@drawable/c_home" />
 
@@ -65,7 +63,7 @@
             android:id="@+id/c_bookmarkTap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="14dp"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:src="@drawable/c_bookmark" />
 
@@ -73,7 +71,7 @@
             android:id="@+id/c_tipTap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_margin="11dp"
             android:layout_weight="1"
             android:src="@drawable/c_ktip" />
 
@@ -81,21 +79,13 @@
             android:id="@+id/c_talkTap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_margin="11dp"
             android:layout_weight="1"
             android:src="@drawable/c_talk" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#999999"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
 
-    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

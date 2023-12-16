@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 바로 아래거는 인터넷 접근 권한 추가임 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 바로 아래거는 사용자가 이미지 업로드할 수 있도록 권한 추가임 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +23,18 @@
             android:name="home.VoiceDataEditActivity"
             android:exported="false" />
         <activity
+            android:name="setting.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name="c_board.BoardEditActivity"
+            android:exported="false" />
+        <activity
+            android:name="c_board.BoardInsdieActivity"
+            android:exported="false" />
+        <activity
+            android:name="c_board.BoardWriteActivity"
+            android:exported="false" />
+        <activity
             android:name="c_contentsList.ContentShowActivity"
             android:exported="false" />
         <activity
@@ -30,19 +44,23 @@
             android:name=".CommunityMainActivity"
             android:exported="false" />
         <activity
-            android:name="account.JoinActivity"
-            android:exported="false" />
-        <activity
-            android:name="account.IntroActivity"
+            android:name="account.LoginActivity"
             android:exported="false" />
         <activity
             android:name="account.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="account.JoinActivity"
+            android:exported="false" />
+        <activity
+            android:name="account.IntroActivity"
+            android:exported="false" />
         <activity
             android:name="home.HomeActivity"
             android:launchMode="singleTop" />
@@ -58,5 +76,4 @@
         <activity android:name="home.VoiceRegistrationActivity" />
         <activity android:name="home.IngredientEditActivity" />
     </application>
-
 </manifest>
