@@ -8,17 +8,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="c_fragments.BookmarkFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="50sp"
-        android:text="BookMark"
-        />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bookmarkRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="70dp"
+            />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="5dp"
@@ -88,15 +90,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#999999"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
-        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

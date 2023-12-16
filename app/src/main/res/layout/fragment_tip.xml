@@ -4,6 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <FrameLayout
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="c_fragments.TipFragment">
@@ -14,12 +15,29 @@
         >
 
         <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="67dp"
+            android:layout_height="300dp"
             android:background="@color/white"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.691">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,36 +48,36 @@
                     android:id="@+id/c_tip_all"
                     android:layout_width="87dp"
                     android:layout_height="111dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_margin="3dp"
                     android:src="@drawable/c_t_all" />
 
                 <ImageView
                     android:id="@+id/c_tip_kf"
                     android:layout_width="90dp"
                     android:layout_height="111dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_margin="3dp"
                     android:src="@drawable/c_t_kf" />
 
                 <ImageView
                     android:id="@+id/c_tip_cf"
                     android:layout_width="90dp"
                     android:layout_height="111dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_margin="3dp"
                     android:src="@drawable/c_t_cf" />
 
                 <ImageView
                     android:id="@+id/c_tip_jf"
                     android:layout_width="90dp"
                     android:layout_height="110dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_margin="3dp"
                     android:src="@drawable/c_t_jf" />
 
             </LinearLayout>
@@ -73,44 +91,41 @@
                     android:id="@+id/c_tip_wf"
                     android:layout_width="87dp"
                     android:layout_height="111dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_margin="3dp"
                     android:src="@drawable/c_t_wf" />
 
                 <ImageView
                     android:id="@+id/c_tip_sf"
                     android:layout_width="90dp"
                     android:layout_height="111dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_margin="3dp"
                     android:src="@drawable/c_t_sf" />
 
                 <ImageView
                     android:id="@+id/c_tip_df"
                     android:layout_width="90dp"
                     android:layout_height="111dp"
+                    android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_margin="3dp"
                     android:src="@drawable/c_t_df" />
 
                 <ImageView
                     android:id="@+id/c_tip_salf"
                     android:layout_width="80dp"
                     android:layout_height="112dp"
-                    android:layout_weight="1"
                     android:layout_margin="3dp"
+                    android:layout_weight="1"
                     android:src="@drawable/c_t_salf" />
 
             </LinearLayout>
 
 
         </LinearLayout>
-
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -182,15 +197,36 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#999999"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        <TextView
+            android:layout_width="322dp"
+            android:layout_height="124dp"
+            android:text="Pick a Category\nto find a Recipe"
+            android:textAlignment="center"
+            android:textColor="@color/c_cstatus"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
-            >
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.741" />
 
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="*The recipes are updated every week"
+            android:textAlignment="center"
+            android:textColor="@color/lightred"
+            android:textSize="15dp"
+            android:textStyle="italic|bold"
+            android:layout_marginLeft="100dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.923" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
