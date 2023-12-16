@@ -46,7 +46,6 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this,"Fail to Log In",Toast.LENGTH_LONG).show()
                     }
-
                     FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             val token = task.result // FCM 토큰
