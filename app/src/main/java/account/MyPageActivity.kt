@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import com.example.fridgeguardian.CommunityMainActivity
 import com.example.fridgeguardian.R
@@ -13,6 +14,7 @@ import com.example.fridgeguardian.databinding.ActivityMyPageBinding
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import home.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,8 +65,7 @@ class MyPageActivity : AppCompatActivity() {
         }
 
         binding.btnDeleteAccount.setOnClickListener {
-            // Delete Firebase user and related data in RoomDB
-            deleteAccount()
+            showDeleteAccountConfirmation()
         }
 
         displayUserInfo()
@@ -95,26 +96,59 @@ class MyPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteAccount() {
+    private fun deleteUserAccount() {
         val user = auth.currentUser
-        user?.delete()?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                // Delete user data from RoomDB
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val db = AppDatabase.getDatabase(applicationContext)
-                    user.email?.let { db.userDao().deleteUserByEmail(it) }
-                    // Redirect to login after deletion from RoomDB
-                    withContext(Dispatchers.Main) {
-                        val intent = Intent(this@MyPageActivity, SplashActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
+        user?.let { firebaseUser ->
+            // Delete from Firestore first
+            val db = FirebaseFirestore.getInstance()
+            db.collection("users").document(firebaseUser.email!!)
+                .delete()
+                .addOnSuccessListener {
+                    // Now delete from FirebaseAuth
+                    firebaseUser.delete()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                // User deleted successfully, now you can delete local data
+                                deleteLocalUserData(firebaseUser.email!!)
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this, "Failed to delete user: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
                 }
-            }
-        }?.addOnFailureListener {
-            // Handle failure, log the error or notify the user
-            Toast.makeText(this, "Failed to delete` account: ${it.message}", Toast.LENGTH_SHORT).show()
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Failed to delete user data from Firestore: ${e.message}", Toast.LENGTH_LONG).show()
+                }
         }
+    }
+
+    private fun deleteLocalUserData(email: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            // Perform Room database deletion operations here
+            val db = AppDatabase.getDatabase(applicationContext)
+            db.userDao().deleteUserByEmail(email)
+            // Navigate back to login screen on UI thread
+            withContext(Dispatchers.Main) {
+                navigateToLoginScreen()
+            }
+        }
+    }
+
+    private fun showDeleteAccountConfirmation() {
+        AlertDialog.Builder(this)
+            .setTitle("Delete Account")
+            .setMessage("Are you sure you want to delete your account? This cannot be undone.")
+            .setPositiveButton("Delete") { dialog, which ->
+                deleteUserAccount()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun navigateToLoginScreen() {
+        val splashIntent = Intent(this, SplashActivity::class.java)
+        startActivity(splashIntent)
+        finish()
     }
 
     private fun setupBottomNavigationView() {

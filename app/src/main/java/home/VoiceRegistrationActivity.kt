@@ -76,6 +76,7 @@ class VoiceRegistrationActivity : AppCompatActivity() {
 
 
     private fun sendTextToGPT(text: String) {
+        showLoading(true)
 
         lifecycleScope.launch(Dispatchers.IO) {
             val openAI =OpenAI(apiKey)
@@ -85,7 +86,7 @@ class VoiceRegistrationActivity : AppCompatActivity() {
                 messages = listOf(
                     ChatMessage(
                         role = ChatRole.System,
-                        content = text + "\n이 정보를 기반으로 {\"category\" :, \"name\" :, \"quantity\"(int type) :, \"expDate\"(type : \"dd/mm/yy\") : } 으로 json 형식의 데이터를 각 재료별로 생성해주세요. 각 식재료의 Key는 name으로 해주세요 답변은 json 형식의 데이터만 해주세요. 언어는 한국어로 해주세요"
+                        content = text + "\n이 정보를 기반으로 {\"category\" :, \"name\" :, \"quantity\"(int type) :, \"expDate\"(type : \"yyyy-MM-dd\") : } 으로 json 형식의 데이터를 각 재료별로 생성해주세요. 각 식재료의 Key는 name으로 해주세요 답변은 json 형식의 데이터만 해주세요. 언어는 한국어로 해주세요"
                     )
                 )
             )
@@ -116,16 +117,25 @@ class VoiceRegistrationActivity : AppCompatActivity() {
             ingredientMap["name"] = jsonIngredient.optString("name", "Unknown")
             ingredientMap["category"] = jsonIngredient.optString("category", "Unknown")
             ingredientMap["quantity"] = jsonIngredient.optInt("quantity", 0)
-            ingredientMap["expDate"] = jsonIngredient.optString("expDate", "Unknown")
+
+            // Ensure the date is in the correct format, if not, handle it accordingly
+            val expDateString = jsonIngredient.optString("expDate", "")
+            if (expDateString.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
+                ingredientMap["expDate"] = expDateString
+            } else {
+                // Handle incorrect date format
+                ingredientMap["expDate"] = "Unknown"
+            }
 
             ingredients.add(ingredientMap)
         }
-        Log.d("ITM", "${ingredients}")
+        Log.d("ITM", ingredients.toString())
         return ingredients
     }
 
     private fun showLoading(show: Boolean) {
         binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+        binding.btnRegistration.isEnabled = !show
     }
 
 
