@@ -32,7 +32,7 @@ data class Ingredient(
         }
 }
 
-class IngredientAdapter(private val ingredientsList: ArrayList<Ingredient>) :
+class IngredientAdapter(private var ingredientsList: ArrayList<Ingredient>) :
     RecyclerView.Adapter<IngredientAdapter.IngredientViewHolder>() {
 
     class IngredientViewHolder(val binding: IngredientItemFormBinding) : RecyclerView.ViewHolder(binding.root)
@@ -70,6 +70,11 @@ class IngredientAdapter(private val ingredientsList: ArrayList<Ingredient>) :
     }
 
     // 식재료 리스트 오름차순/내림차순 정렬
+    fun updateData(newIngredients: ArrayList<Ingredient>) {
+        ingredientsList = newIngredients
+        notifyDataSetChanged()
+    }
+
     fun sortIngredients(ascending: Boolean) {
         ingredientsList.sortWith(compareBy { it.daysUntilExpired })
         if (!ascending) {
