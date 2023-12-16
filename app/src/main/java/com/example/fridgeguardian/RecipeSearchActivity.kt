@@ -90,15 +90,6 @@ class RecipeSearchActivity : AppCompatActivity() {
                             recyclerView.layoutManager = LinearLayoutManager(this@RecipeSearchActivity)
                             recyclerView.adapter = adapter
 
-                            // 리소스에서 Divider Drawable 가져오기
-                            val divider = ContextCompat.getDrawable(this@RecipeSearchActivity, R.drawable.divider)
-
-                            divider?.let {
-                                val dividerItemDecoration = DividerItemDecoration(this@RecipeSearchActivity, RecyclerView.VERTICAL)
-                                dividerItemDecoration.setDrawable(it)
-                                recyclerView.addItemDecoration(dividerItemDecoration)
-                            }
-
 
 
                         } else {

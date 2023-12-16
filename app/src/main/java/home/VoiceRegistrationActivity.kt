@@ -100,7 +100,7 @@ class VoiceRegistrationActivity : AppCompatActivity() {
                     val intent = Intent(this@VoiceRegistrationActivity, VoiceDataEditActivity::class.java)
                     intent.putExtra("parsedIngredients", ArrayList(ingredients))
                     startActivity(intent)
-                    }
+                }
             }
         }
     }

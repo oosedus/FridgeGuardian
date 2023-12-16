@@ -15,30 +15,33 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import org.w3c.dom.Text
 
 
-class RecipeAdapter(private val recipeList: List<RecipeDataForm>, private val context: Context) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>() {
+class IngredientRecipeAdapter(private val recipeList: List<Pair<RecipeDataForm, Int>>, private val context: Context) : RecyclerView.Adapter<IngredientRecipeAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.recipe_image)
         val name: TextView = view.findViewById(R.id.recipe_name)
+        val count : TextView = view.findViewById(R.id.count)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recipe_item_small_form, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.recipe_item_small_form2, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val recipe = recipeList[position]
-        holder.name.text = recipe.RCP_NM
+        holder.name.text = recipe.first.RCP_NM
+        holder.count.text = recipe.second.toString()
 
 
         // 이미지 로딩 라이브러리인 Glide를 사용하여 이미지를 불러옵니다.
-        val imageUrl = recipe.ATT_FILE_NO_MK
+        val imageUrl = recipe.first.ATT_FILE_NO_MK
         val options = RequestOptions()
-            .placeholder(R.drawable.foodexample) // 로드 중에 표시할 이미지
-            .error(R.drawable.foodexample2) // 에러 발생 시 표시할 이미지
+            .placeholder(R.drawable.loading) // 로드 중에 표시할 이미지
+            .error(R.drawable.error) // 에러 발생 시 표시할 이미지
 
         Glide.with(context)
             .load(imageUrl)

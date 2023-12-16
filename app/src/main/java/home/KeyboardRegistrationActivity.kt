@@ -19,6 +19,7 @@ import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.ActivityKeyboardRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import home.Ingredient
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
