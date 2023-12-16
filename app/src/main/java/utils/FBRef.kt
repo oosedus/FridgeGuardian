@@ -18,5 +18,8 @@ class FBRef {
 
         //커뮤니티 게시글을 board에 저장할거임
         val boardRef = database.getReference("board")
+
+        //커뮤니티에서 게시글마다의 댓글을 저장할거임
+        val commentRef = database.getReference("comment")
     }
 }

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 
-<layout>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="c_fragments.BookmarkFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
         >
 
         <androidx.recyclerview.widget.RecyclerView
@@ -93,6 +95,18 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@color/c_cstatus"
+        android:paddingHorizontal="100dp"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check out\nrecipes you liked!"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </FrameLayout>
 </layout>
