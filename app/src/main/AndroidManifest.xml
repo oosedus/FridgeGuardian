@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- 바로 아래거는 인터넷 접근 권한 추가임 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 바로 아래거는 사용자가 이미지 업로드할 수 있도록 권한 추가임 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 바로 아래거는 사용자가 이미지 업로드할 수 있도록 권한 추가임 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +19,9 @@
         android:theme="@style/Theme.FridgeGuardian"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name="home.VoiceDataEditActivity"
+            android:exported="false" />
         <activity
             android:name="setting.SettingActivity"
             android:exported="false" />
@@ -66,7 +71,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name="home.HomeActivity"
             android:launchMode="singleTop" />
         <activity android:name=".RecipeActivity" />
         <activity android:name=".CommunityActivity" />
@@ -74,9 +79,9 @@
         <activity android:name=".RecipeSearchActivity" />
         <activity android:name=".RecipeDetailActivity" />
         <activity android:name=".BookmarkActivity" />
-        <activity android:name=".KeyboardRegistrationActivity" />
-        <activity android:name=".VoiceRegistrationActivity" />
-        <activity android:name=".IngredientEditActivity" />
+        <activity android:name="home.KeyboardRegistrationActivity" />
+        <activity android:name="home.VoiceRegistrationActivity" />
+        <activity android:name="home.IngredientEditActivity" />
     </application>
 
 </manifest>

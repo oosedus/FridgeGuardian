@@ -1,4 +1,4 @@
-package com.example.fridgeguardian
+package home
 
 
 import android.app.AlertDialog
@@ -8,9 +8,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fridgeguardian.CommunityActivity
+import com.example.fridgeguardian.CommunityMainActivity
+import com.example.fridgeguardian.MyPageActivity
+import com.example.fridgeguardian.R
+import com.example.fridgeguardian.RecipeActivity
 import com.example.fridgeguardian.databinding.ActivityIngredientEditBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -209,7 +213,7 @@ class IngredientEditActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_community -> {
-                    startActivity(Intent(this, CommunityActivity::class.java))
+                    startActivity(Intent(this, CommunityMainActivity::class.java))
                     true
                 }
 

@@ -1,4 +1,4 @@
-package com.example.fridgeguardian
+package home
 
 import android.content.Intent
 import android.graphics.Color
