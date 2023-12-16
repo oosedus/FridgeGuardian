@@ -40,8 +40,8 @@ class IngredientRecipeAdapter(private val recipeList: List<Pair<RecipeDataForm, 
         // 이미지 로딩 라이브러리인 Glide를 사용하여 이미지를 불러옵니다.
         val imageUrl = recipe.first.ATT_FILE_NO_MK
         val options = RequestOptions()
-            .placeholder(R.drawable.foodexample) // 로드 중에 표시할 이미지
-            .error(R.drawable.foodexample2) // 에러 발생 시 표시할 이미지
+            .placeholder(R.drawable.loading) // 로드 중에 표시할 이미지
+            .error(R.drawable.error) // 에러 발생 시 표시할 이미지
 
         Glide.with(context)
             .load(imageUrl)

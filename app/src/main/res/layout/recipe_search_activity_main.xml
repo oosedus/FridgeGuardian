@@ -36,12 +36,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recipe_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="522dp"
+        android:layout_height="700dp"
         android:layout_below="@+id/search"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="-3dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="3dp" />
 
     <SearchView

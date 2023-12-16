@@ -1,5 +1,6 @@
 package com.example.fridgeguardian
 
+import Account.MyPageActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.Timestamp
+import home.HomeActivity
 import java.util.Date
 
 class RecipeSearchWithIngredientActivity : AppCompatActivity() {
@@ -21,6 +23,7 @@ class RecipeSearchWithIngredientActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe_search_ingredient_activity)
+        Log.d("ITM", "???????")
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         toolbar.title = "Recipe"
@@ -31,7 +34,7 @@ class RecipeSearchWithIngredientActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    val intent = Intent(this, HomeActivity::class.java)
+                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     true
                 }
@@ -93,14 +96,6 @@ class RecipeSearchWithIngredientActivity : AppCompatActivity() {
                     startActivity(intent)  // 다른 액티비티 시작
                 }
 
-                // 리소스에서 Divider Drawable 가져오기
-                val divider = ContextCompat.getDrawable(this@RecipeSearchWithIngredientActivity, R.drawable.divider)
-
-                divider?.let {
-                    val dividerItemDecoration = DividerItemDecoration(this@RecipeSearchWithIngredientActivity, RecyclerView.VERTICAL)
-                    dividerItemDecoration.setDrawable(it)
-                    recyclerView.addItemDecoration(dividerItemDecoration)
-                }
             }.addOnFailureListener { exception ->
                 Log.d("ITM", "데이터 로드 실패: ${exception.message}")
             }

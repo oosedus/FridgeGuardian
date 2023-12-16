@@ -1,7 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.FridgeGuardian" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.FridgeGuardian" parent="Theme.AppCompat.Light">
         <!-- Customize your dark theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/mainColor_insun</item>
+        <item name="colorPrimaryDark">@color/mainColor_insun</item>
+        <item name="colorPrimaryVariant">@color/mainColor_insun</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 </resources>

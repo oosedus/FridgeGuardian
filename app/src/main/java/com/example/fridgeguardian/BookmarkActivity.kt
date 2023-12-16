@@ -1,9 +1,9 @@
 package com.example.fridgeguardian
 
+import Account.MyPageActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -12,11 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import home.HomeActivity
 
 class BookmarkActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,14 +79,7 @@ class BookmarkActivity : AppCompatActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(this@BookmarkActivity)
                 recyclerView.adapter = adapter
 
-                // 리소스에서 Divider Drawable 가져오기
-                val divider = ContextCompat.getDrawable(this@BookmarkActivity, R.drawable.divider)
 
-                divider?.let {
-                    val dividerItemDecoration = DividerItemDecoration(this@BookmarkActivity, RecyclerView.VERTICAL)
-                    dividerItemDecoration.setDrawable(it)
-                    recyclerView.addItemDecoration(dividerItemDecoration)
-                }
 
 
 
