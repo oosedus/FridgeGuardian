@@ -9,8 +9,9 @@
     <color name="c_maincolor">#DEFDE0</color>
     <color name="c_cstatus">#47E1A8</color>
 
-
+    <color name="transparent">#00ff0000</color>
     <color name="lightred">#F48A94</color>
     <color name="lightblue">#92C9FF</color>
+
 
 </resources>
