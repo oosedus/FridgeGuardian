@@ -6,6 +6,7 @@
     <!-- 바로 아래거는 사용자가 이미지 업로드할 수 있도록 권한 추가임 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
 
     <application
         android:allowBackup="true"
