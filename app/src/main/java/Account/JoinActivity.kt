@@ -2,6 +2,7 @@ package account
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,8 @@ import com.example.fridgeguardian.R
 import com.example.fridgeguardian.databinding.ActivityJoinBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.messaging.FirebaseMessaging
 import home.HomeActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,6 +54,38 @@ class JoinActivity : AppCompatActivity() {
                             Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()
                         }
                     }
+                FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val token = task.result // FCM 토큰
+                        val firebaseAuth = FirebaseAuth.getInstance()
+                        val currentUser = firebaseAuth.currentUser
+                        if (currentUser != null){
+                            Log.d("ITM", "why")
+                        }
+                        val db = FirebaseFirestore.getInstance()
+
+                        if (currentUser != null) {
+                            val currentUserEmail = FirebaseAuth.getInstance().currentUser?.email
+                            val userRef = db.collection("users").document("${currentUserEmail}")
+
+                            // FCM 필드에 토큰 저장
+                            val data = hashMapOf("token" to token)
+
+                            userRef.set(data, SetOptions.merge())
+                                .addOnSuccessListener {
+                                    Log.d("ITM", "Token saved successfully!")
+                                }
+                                .addOnFailureListener {
+                                    Log.d("ITM", "Failed to save token: ${it.message}")
+                                }
+                        } else {
+                            Log.d("ITM", "Current user email is null??")
+                            Log.d("ITM", "Token: ${token}")
+                        }
+                    } else {
+                        Log.d("ITM", "Failed to fetch FCM token: ${task.exception}")
+                    }
+                }
             }
         }
     }

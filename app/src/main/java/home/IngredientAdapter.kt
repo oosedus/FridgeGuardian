@@ -23,9 +23,23 @@ data class Ingredient(
     var documentId: String = ""
     val daysUntilExpired: Int
         get() {
-            val today = Calendar.getInstance().time
+            val today = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.time
+
             return if (expDate != null) {
-                ((expDate!!.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
+                val expDateMidnight = Calendar.getInstance().apply {
+                    time = expDate!!
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }.time
+
+                ((expDateMidnight.time - today.time) / (1000 * 60 * 60 * 24)).toInt()
             } else {
                 0
             }
